@@ -1,0 +1,66 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+
+            {{ include("main/message.html.twig") }}
+
+            <div class="card mb-3 mb-md-4">
+
+                <div class="card-body">
+
+                    <div class="mb-3 mb-md-4 d-flex justify-content-between">
+                        <div class="h3 mb-0">Formulario de Dependencias</div>
+                    </div>
+
+                        {{ form_start(form,{ 'attr': {'class': '', 'enctype': 'multipart/form-data' , 'novalidate': 'novalidate'}}) }}
+
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-12">
+                                <label for="name">Nombre</label>
+                                {{ form_widget(form.nombre, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'minlength': '3', 'placeholder': 'Teclee el nombre'} }) }}
+                                <span class="error"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-12">
+                                <label for="name">Centro</label>
+                                {{ form_widget(form.centro, { 'attr': {'class': 'custom-select select22', 'autocomplete': 'off', 'required':''} }) }}
+                                <span class="error"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-12">
+                                <label for="name">Departamentos</label>
+                                {{ form_widget(form.departamentos, { 'attr': {'class': 'custom-select select2', 'autocomplete': 'off'} }) }}
+                                <span class="error"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="float-right">
+
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="{{ path('dependencia_index') }}" type="button" class="btn btn-secondary">Cancelar</a>
+                        </div>
+
+                        {{ form_end(form) }}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

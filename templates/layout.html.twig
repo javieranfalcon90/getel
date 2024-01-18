@@ -1,0 +1,168 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <div class="page-preloader"></div>
+
+<header class="header bg-body">
+    <nav class="navbar flex-nowrap p-0">
+        <div class="navbar-brand-wrapper d-flex align-items-center col-auto">
+
+            <!-- Logo For Desktop View -->
+            <a class="navbar-brand navbar-brand-desktop" href="/">
+                <img class="side-nav-hide-on-closed" src="{{ asset('img/logo.png') }}" alt="Graindashboard" style="width: auto; height: 50px; padding-left: 15px;">
+            </a>
+            <!-- End Logo For Desktop View -->
+
+            <a class="navbar-brand navbar-brand-desktop" href="/">
+                <i class="fas fa-certificate fa-2x side-nav-show-on-closed" alt="Graindashboard" style="width: auto; height: 33px;"></i>
+
+            </a>
+
+        </div>
+
+        <div class="header-content col px-md-3">
+
+            <div class="d-flex align-items-center">
+                <!-- Side Nav Toggle -->
+                <a  class="js-side-nav header-invoker d-flex mr-md-2" href="#"
+                    data-close-invoker="#sidebarClose"
+                    data-target="#sidebar"
+                    data-target-wrapper="body">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <!-- End Side Nav Toggle -->
+
+                <div class="dropdown ml-auto">
+                    <a href="javascript:;">
+                        <span class="mr-md-2 avatar-placeholder">{{ app.user.useridentifier|first }}</span>
+                        {{ app.user.useridentifier }}
+                    </a>
+                </div>
+                <div class="dropdown mx-3">
+                    <a href="{{ path('usuario_logout') }}">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="main">
+    <!-- Sidebar Nav -->
+    <aside id="sidebar" class="js-custom-scroll side-nav">
+        <ul id="sideNav" class="side-nav-menu side-nav-menu-top-level mb-0">
+                <!-- Title -->
+                <li class="sidebar-heading h6">Principal</li>
+                <!-- End Title -->
+
+                <li class="side-nav-menu-item">
+                    <a class="side-nav-menu-link media align-items-center" href="{{ path('app_homepage') }}">
+                  <span class="side-nav-menu-icon d-flex mr-3">
+                    <i class="fas fa-home"></i>
+                  </span>
+                        <span class="side-nav-fadeout-on-closed media-body">Inicio</span>
+                    </a>
+                </li>
+                <li class="side-nav-menu-item">
+                    <a class="side-nav-menu-link media align-items-center" href="{{ path('llamada_index') }}">
+                  <span class="side-nav-menu-icon d-flex mr-3">
+                    <i class="fas fa-phone"></i>
+                  </span>
+                        <span class="side-nav-fadeout-on-closed media-body">Llamadas</span>
+                    </a>
+                </li>
+
+
+
+                {% if is_granted('ROLE_ADMINISTRADOR') %}
+                    <!-- Title -->
+                    <li class="sidebar-heading h6">Configuración</li>
+                    <!-- End Title -->
+
+                    <li class="side-nav-menu-item">
+                        <a class="side-nav-menu-link media align-items-center" href="{{ path('configuracion') }}">
+                      <span class="side-nav-menu-icon d-flex mr-3">
+                        <i class="fas fa-cogs"></i>
+                      </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Configuración</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if is_granted('ROLE_ADMINISTRADOR') or is_granted('ROLE_ECONOMIA') or is_granted('ROLE_CONSULTOR')%}
+                    <!-- Title -->
+                    <li class="sidebar-heading h6">Reporte</li>
+                    <!-- End Title -->
+
+                    <li class="side-nav-menu-item">
+                        <a class="side-nav-menu-link media align-items-center" href="{{ path('reporte_general_index') }}">
+                      <span class="side-nav-menu-icon d-flex mr-3">
+                        <i class="fas fa-search"></i>
+                      </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Reporte General</span>
+                        </a>
+                    </li>
+                    
+                    <li class="side-nav-menu-item">
+                        <a class="side-nav-menu-link media align-items-center" href="{{ path('reporte_codigo_index') }}">
+                      <span class="side-nav-menu-icon d-flex mr-3">
+                        <i class="fas fa-search"></i>
+                      </span>
+                            <span class="side-nav-fadeout-on-closed media-body">Reporte por Código</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+
+        </ul>
+    </aside>
+    <!-- End Sidebar Nav -->
+
+    <div class="content" >
+        <div class="py-4 px-3 px-md-4">
+
+            {% block content %}{% endblock %} 
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="small p-3 px-md-4 mt-auto">
+            <div class="row justify-content-between">
+
+                <div class="col-lg text-center text-lg-right">
+                    © {{ 'now'|date('Y') }} GETEL v2.0. Dpto de Infocomunicaciones CECMED.
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+    </div>
+</main>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+        setTimeout(function () {
+            $("div.alert").fadeOut();//hide it after 10 seconds
+        }, 4500);
+    </script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock %}
+
+
+
+
+
+
+
+

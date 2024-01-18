@@ -1,0 +1,87 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+
+        {{ include("main/message.html.twig") }}
+
+            <div class="card mb-3 mb-md-4">
+
+                <div class="card-body">
+
+                    <div class="mb-3 mb-md-4 d-flex justify-content-between">
+                        <div class="h3 mb-0">Listado de Llamadas</div>
+
+                        <div class="">
+                            <div class="input-group ">
+                                <div class="input-group-prepend">
+                                    <i class="fas fa-calendar-alt icon-text icon-text-sm text-primary"></i>
+                                </div>
+                                <input id="date" class="form-control form-control-icon-text" placeholder="Search" type="text" value="{{ anno }}">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Tronco</th>
+                                    <th>Teléfono</th>
+                                    <th>Duración</th>
+                                    <th>Identificador</th>
+                                    <th>Localidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script>
+
+        $(document).ready(function() {
+
+            $("#date").datetimepicker({
+              locale: "es",
+              format: "YYYY"
+            });
+
+            $("#date").datetimepicker().on("dp.change", function(ev) {
+                var fecha = $("#date").val();
+
+                $("#anno").attr("value", fecha);
+
+                dataTable.destroy();
+                route = Routing.generate("llamada_dataTable", { anno: fecha });
+                dataTable = createDataTable(Nosortcol, route);
+
+            });
+
+
+            /* Generando el componente DataTable */
+            var Nosortcol = [];
+            var fecha = $("#date").val();
+            var route = Routing.generate('llamada_dataTable', { anno: fecha });
+            var dataTable = createDataTable(Nosortcol, route);
+
+        });
+
+    </script>
+
+{% endblock %}
+

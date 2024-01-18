@@ -1,0 +1,44 @@
+security:
+
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
+    providers:
+        chain_provider:
+            chain:
+                 providers: [in_memory, usuario]
+        in_memory:
+            memory:
+                 users:
+                      SuperAdministrador:
+                           password: $2y$13$NKuzZGv.TH6y9uXtsl4dKeHpsGS1QLmrQz.pMyxhe2dVhxVorXhDK
+                           roles: 'ROLE_ADMINISTRADOR'
+        usuario:
+            entity: { class: App\Entity\Usuario, property: username }
+
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        frontend:
+            lazy: true
+            provider: chain_provider
+            form_login:
+                always_use_default_target_path: true
+                login_path: usuario_login
+                check_path: usuario_login
+                default_target_path: app_homepage
+                enable_csrf: true
+            logout:
+                path: usuario_logout
+                target: usuario_login
+
+    access_control:
+       - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+       - { path: ^/olvide_pass, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+       - { path: ^/cambiar_pass, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+       - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

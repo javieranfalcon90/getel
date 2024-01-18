@@ -1,0 +1,54 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+
+            {{ include("main/message.html.twig") }}
+
+            <div class="card mb-3 mb-md-4">
+
+                <div class="card-body">
+
+                    <div class="mb-3 mb-md-4 d-flex justify-content-between">
+                        <div class="h3 mb-0">Formulario de Zonas</div>
+                    </div>
+
+					<div>
+                        {{ form_start(form,{ 'attr': {'class': '', 'enctype': 'multipart/form-data'}}) }}
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-md-12">
+                                    <label for="name">Nombre</label>
+                                    {{ form_widget(form.nombre, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'minlength': '3', 'placeholder': 'Teclee el nombre'} }) }}
+                                    <span class="error"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-md-12">
+                                    <label for="name">Tarifa</label>
+                                    {{ form_widget(form.tarifa, { 'attr': {'class': 'custom-select', 'autocomplete': 'off', 'minlength': '3', 'data-placeholder': 'Seleccione la tarifa'} }) }}
+                                    <span class="error"></span>
+                                </div>
+
+                            </div>
+                            
+							<div class="float-right">
+
+							    <button type="submit" class="btn btn-primary">Guardar</button>
+							    <a href="{{ path('zona_index') }}" type="button" class="btn btn-secondary">Cancelar</a>
+							</div>
+
+                        {{ form_end(form) }}
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

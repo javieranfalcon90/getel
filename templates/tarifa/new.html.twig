@@ -1,0 +1,89 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+
+        {{ include("main/message.html.twig") }}
+
+            <div class="card mb-3 mb-md-4">
+
+                <div class="card-body">
+
+                    <div class="mb-3 mb-md-4 d-flex justify-content-between">
+                        <div class="h3 mb-0">Formulario de Tarifas</div>
+                    </div>
+
+					<div>
+                        {{ form_start(form,{ 'attr': {'class': '', 'enctype': 'multipart/form-data'}}) }}
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-md-12">
+                                    <label for="name">Nombre</label>
+                                    {{ form_widget(form.nombre, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'minlength': '3', 'placeholder': 'Teclee el nombre'} }) }}
+                                    <span class="error"></span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-md-4">
+                                    <label for="name">Desde diurno</label>
+                                    <div class="d-flex">
+                                        {{ form_widget(form.desdediurno['hour'], { 'attr': {'class': 'custom-select', 'autocomplete': 'off', 'placeholder': 'Seleccione la hora'} }) }}
+                                        <p> : </p>
+                                        {{ form_widget(form.desdediurno['minute'], { 'attr': {'class': 'custom-select', 'autocomplete': 'off', 'placeholder': 'Seleccione la hora'} }) }}
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+
+                                <div class="form-group col-12 col-md-4">
+                                    <label for="name">Hasta diurno</label>
+                                    {{ form_widget(form.hastadiurno, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'placeholder': 'Seleccione la hora'} }) }}
+                                    <span class="error"></span>
+                                </div>
+
+                                <div class="form-group col-12 col-md-4">
+                                    <label for="name">Tarifa diurno</label>
+                                    {{ form_widget(form.tarifadiurno, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'placeholder': 'Teclee la tarifa'} }) }}
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-12 col-md-4">
+                                    <label for="name">Desde nocturno</label>
+                                    {{ form_widget(form.desdenocturno, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'placeholder': 'Seleccione la hora'} }) }}
+                                    <span class="error"></span>
+                                </div>
+
+                                <div class="form-group col-12 col-md-4">
+                                    <label for="name">Hasta nocturno</label>
+                                    {{ form_widget(form.hastanocturno, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'placeholder': 'Seleccione la hora'} }) }}
+                                    <span class="error"></span>
+                                </div>
+
+                                <div class="form-group col-12 col-md-4">
+                                    <label for="name">Tarifa nocturno</label>
+                                    {{ form_widget(form.tarifanocturno, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'placeholder': 'Teclee la tarifa'} }) }}
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                            
+							<div class="float-right">
+
+							    <button type="submit" class="btn btn-primary">Guardar</button>
+							    <a href="{{ path('tarifa_index') }}" type="button" class="btn btn-secondary">Cancelar</a>
+							</div>
+
+                        {{ form_end(form) }}
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

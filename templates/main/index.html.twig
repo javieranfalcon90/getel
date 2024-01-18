@@ -1,0 +1,90 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+            <div class="mb-3 mb-md-4 d-flex justify-content-between">
+                <div class="h3 mb-0">Inicio</div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card mb-3 mb-md-4">
+
+                        <div class="card-body">
+
+
+                            <div class="row text-center">
+                                <div class="col-12 col-md-4 mb-3 mb-md-0">
+                                    <div class="h4 mb-0">
+                                        {{ costo_total }} <span class="h5">CUP</span>
+                                    </div>
+                                    <small class="text-muted">Gasto Total {{ 'now'|date('Y') }}</small>
+                                </div>
+
+                                <div class="col-12 col-md-4 mb-3 mb-md-0 border-left">
+                                    <div class="h4 mb-0">
+                                        {{ costo_total_local }} <span class="h5">CUP</span>
+                                    </div>
+                                    <small class="text-muted">Gasto Llamadas Locales {{ 'now'|date('Y') }}</small>
+                                </div>
+
+                                <div class="col-12 col-md-4 mb-3 mb-md-0 border-left">
+                                    <div class="h4 mb-0">
+                                         {{ costo_total_distancia }} <span class="h5">CUP</span>
+                                    </div>
+                                    <small class="text-muted">Gasto Llamadas a Distancia {{ 'now'|date('Y') }}</small>
+                                </div>
+
+                            </div>
+
+                            <canvas id="myChart" class="pt-4" height="100"></canvas>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+
+
+    <script>
+
+        $(document).ready(function() {
+
+                    myChart = new Chart($('#myChart'), {
+                        type: 'line',
+                        data: {
+                            labels: {{ llamadas_x_localidades['localidad']|json_encode()|raw }},
+                            datasets: [{
+                                label: 'Cant Llamadas',
+                                data: {{ llamadas_x_localidades['count']|json_encode()|raw }},
+                                backgroundColor: '#265df1'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+        });
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+
+            {{ include("main/message.html.twig") }}
+
+            <div class="card mb-3 mb-md-4">
+
+                <div class="card-body">
+
+                    <div class="mb-3 mb-md-4 d-flex justify-content-between">
+                        <div class="h3 mb-0">Formulario de Usuarios</div>
+                    </div>
+
+                        {{ form_start(form,{ 'attr': {'class': 'form', 'enctype': 'multipart/form-data', 'novalidate': 'novalidate'}}) }}
+
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-12">
+                                <label for="name">Nombre</label>
+                                {{ form_widget(form.nombre, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'minlength': '3', 'placeholder': 'Teclee el nombre', 'required':''} }) }}
+                                <span class="error"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-12">
+                                <label for="name">Email</label>
+                                {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'placeholder': 'Teclee el email', 'required': ''} }) }}
+                                <span class="error"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-12">
+                                <label for="name">Username</label>
+                                {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'placeholder': 'Teclee el username', 'required': ''} }) }}
+                                <span class="error"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-12">
+                                <label for="name">Password</label>
+                                {{ form_widget(form.password.first, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'placeholder': 'Teclee el password', 'required': ''} }) }}
+                                <span class="error"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-12">
+                                <label for="name">Repetir Password</label>
+                                {{ form_widget(form.password.second, { 'attr': {'class': 'form-control', 'autocomplete': 'off', 'placeholder': 'Repita el password', 'equalTo': '#usuario_password_first', 'required': ''} }) }}
+                                <span class="error"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-12">
+                                <label for="name">Estado</label>
+                                {{ form_widget(form.estado, { 'attr': {'class': '', 'autocomplete': 'off', 'checked':''} }) }}
+                                <span class="error"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-12">
+                                <label for="name">Rol</label>
+                                {{ form_widget(form.role, { 'attr': {'class': 'custom-select select2', 'autocomplete': 'off', 'required':''} }) }}
+                                <span class="error"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-16 col-md-12">
+                                <label for="name">Departamento</label>
+                                {{ form_widget(form.departamento, { 'attr': {'class': 'custom-select select2', 'autocomplete': 'off'} }) }}
+                                <span class="error"></span>
+                            </div>
+
+                        </div>
+                               
+
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="{{ path('usuario_index') }}" type="button" class="btn btn-secondary">Cancelar</a>
+                        </div>
+
+                        {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+
+    {{ parent() }}
+    <script>
+
+        $(document).ready(function() {
+
+
+        var temp = {{ usuario.id }}+'';
+
+
+
+        if (temp){
+        $('#usuario_password_first').removeAttr('required');
+        $('#usuario_password_second').removeAttr('required');
+        }
+
+        });
+               
+
+    </script>
+
+{% endblock %}

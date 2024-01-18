@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <title>{% block title %}GETEL{% endblock %}</title>
+
+        {% block stylesheets %}
+
+            <link href="{{ asset('librerias/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+            
+            <link href="{{ asset('librerias/select2-bootstrap4/select2.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('librerias/select2-bootstrap4/select2-bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+
+            <link href="{{ asset('librerias/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css" />
+
+            <link href="{{ asset('librerias/datatables-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+
+            <link href="{{ asset('librerias/datatables-bs4/css/responsive.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
+
+            <link href="{{ asset('librerias/datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css" />
+
+            <link href="{{ asset('librerias/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css" />
+
+            <link href="{{ asset('librerias/chart/Chart.min.css') }}" rel="stylesheet" type="text/css" />
+
+            <link href="{{ asset('librerias/grain/graindashboard.css') }}" rel="stylesheet" />
+
+            <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+            
+        {% endblock %}
+    </head>
+    <body class="has-sidebar has-fixed-sidebar-and-header" >
+        {% block body %}{% endblock %} 
+
+
+
+        {% block javascripts %}
+
+
+
+
+            <!-- jQuery -->
+            <script src="{{ asset('librerias/jquery/jquery.min.js') }}"></script>
+            
+            
+            <script src="{{ asset('librerias/grain/graindashboard.js') }}"></script>
+            <script src="{{ asset('librerias/grain/graindashboard.vendor.js') }}"></script>
+                       
+            <!-- Bootstrap 4 -->
+            <script src="{{ asset('librerias/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+            <!-- Select2 B4 -->
+            <script src="{{ asset('librerias/select2-bootstrap4/select2.min.js') }}"></script>
+            
+
+
+
+            <!-- Print Area -->
+            <script src="{{ asset('librerias/printarea/jquery.PrintArea.js') }}"></script>
+
+            <!-- Data Tables -->
+            <script src="{{ asset('librerias/datatables-bs4/js/jquery.dataTables.min.js') }}"></script>
+            <script src="{{ asset('librerias/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+            <script src="{{ asset('librerias/datatables-bs4/js/dataTables.responsive.min.js') }}"></script>
+            
+            <!-- DateTimePicker -->
+            <script src="{{ asset('librerias/moment/moment-with-locales.js') }}"></script>
+            <script src="{{ asset('librerias/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+
+            <!-- Sweetalert -->
+            <script src="{{ asset('librerias/sweetalert/sweetalert.min.js') }}"></script>
+            <!-- Chart Js -->
+            <script src="{{ asset('librerias/chart/Chart.min.js') }}"></script>
+
+            <!-- JQuery Validate -->
+            <script src="{{ asset('librerias/jquery-validate/jquery.validate.min.js') }}"></script>
+            <script src="{{ asset('librerias/jquery-validate/additional-methods.js') }}"></script>
+            <script src="{{ asset('librerias/jquery-validate/localization/messages_es.min.js') }}"></script>
+
+
+
+
+            
+            <script src="{{ asset('js/cecmedConfirmacion.js') }}"></script>
+            <script src="{{ asset('js/cecmedDataTable.js') }}"></script>
+            <script src="{{ asset('js/cecmedValidacion.js') }}"></script>
+<script src="{{ asset('js/script.js') }}"></script>
+
+
+
+
+        {% endblock %}
+    </body>
+</html>

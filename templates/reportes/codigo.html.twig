@@ -1,0 +1,223 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+
+            <div class="card mb-3 mb-md-4">
+
+                <div class="card-body">
+
+                    <div class="mb-3 mb-md-4 d-flex justify-content-between">
+                        <div class="h3 mb-0">Reportes</div>
+
+                    </div>
+
+                    <div>
+                        <form class="form" novalidate="novalidate">
+                            <div class="form-row">
+
+                                <div class="form-group col-12 col-md-8">
+                                    <label>Rango de fecha</label>
+                                    <div class="input-group">
+                                        <input id="fecha_inicio" name="fecha_inicio" class="form-control" value="">
+                                        <div class="input-group-append input-group-append-simple">
+
+                                            <a class="input-group-text bg-transparent text-muted" href="javascript:;">
+                                                <i class="fas fa-layers icon-text icon-text-sm"></i>
+                                            </a>
+
+                                        </div>
+                                        <input id="fecha_fin" name="fecha_fin" class="form-control" value="" required="required">
+                                    </div>
+                                    <span class="error"></span>
+                                </div>
+
+                                <div class="form-group col-12 col-md-4">
+                                    <label>Código</label>
+
+                                    <select id="centro" name="codigo" class="custom-select select2" required="required">
+                                        <option></option>
+                                        {% for identificador in identificadores %}
+                                            <option value="{{ identificador.numero }}">{{ identificador.numero }} - {% if identificador.responsable %}{{ identificador.responsable }}{% else %} Extensión {% endif %}</option>
+                                        {% endfor %}
+                                    </select> 
+                                    <span class="error"></span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-12 ">
+
+                                <button class="imprimir btn btn-primary" style="display: none"><i class="fas fa-print"></i> </button>
+                                <button class="col-md-2 btn btn-primary float-right" type="submit">
+                                    <span style="display: none;" id="buscando" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    <span id="buscar"> Buscar </span>
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+
+            <div class="card mb-3 mb-md-4">
+
+                <div class="card-body">
+
+                    <div class="table-responsive printArea">
+                        <table class="table table-hovered table-sm" id="">
+                            <thead>
+                                <tr class="bg-light">
+                                    <th>
+                                        Centro: <span id="centro_label"> </span>
+                                    </th>
+                                    <th>
+                                        Código: <span id="codigo_label"> </span>
+                                    </th>                                 
+                                    <th>	
+                                        Fecha Inicio <span id="fecha_inicio_label"></span>
+                                    </th>
+                                    <th>
+                                        Fecha Fin <span id="fecha_fin_label"></span>
+                                    </th>
+                                    <th>  
+                                        Costo Total: <span id="costo_total_label"></span>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Teléfono</th>
+                                    <th>Duración</th>
+                                    <th>Localidad</th>
+                                    <th>Costo</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" class="text-center">No hay datos para mostrar</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script>
+
+        $(document).ready(function () {
+
+            $('.imprimir').on('click', function () {
+                var options = {mode: 'popup'};
+                $('.printArea').printArea(options);
+            });
+
+            $('#fecha_inicio').datetimepicker({
+                format: 'DD-MM-YYYY',
+                locale: 'es'
+            });
+            $('#fecha_fin').datetimepicker({
+                format: 'DD-MM-YYYY',
+                locale: 'es',
+                useCurrent: false //Important! See issue #1075
+            });
+            $("#fecha_inicio").on("dp.change", function (e) {
+                $('#fecha_fin').attr('required');
+                $('#fecha_fin').data("DateTimePicker").minDate(e.date);
+            });
+            $("#fecha_fin").on("dp.change", function (e) {
+                $('#fecha_inicio').data("DateTimePicker").maxDate(e.date);
+            });
+
+
+            $('.form').on('submit', function (e) {
+                e.preventDefault();
+
+                if (($('#fecha_inicio').val() != '' && $('#fecha_fin').val() != '') && ($('#centro').val() != "")) {
+
+                    $('#centro_label').html('');
+                    $('#codigo_label').html('');
+                    
+                    $('#fecha_inicio_label').html('');
+                    $('#fecha_fin_label').html('');
+                    $('#costo_total_label').html('');
+                    $('.table tbody').html('');
+
+
+                    $('#buscando').css('display', '');
+                    $('#buscar').css('display', 'none');
+
+                    $.ajax({
+                        url: Routing.generate('reporte_codigo'),
+                        method: "POST",
+                        data: $('.form').serialize()
+                    }).done(function (respond) {
+
+                        $('.table tbody').html('');
+
+                        $('#centro_label').append(respond.centro);
+                        $('#codigo_label').append(respond.codigo);
+                        $('#costo_total_label').append(respond.costo_total);
+                        $('#fecha_inicio_label').append(respond.fecha_inicio);
+                        $('#fecha_fin_label').append(respond.fecha_fin);
+
+                        $('#buscando').css('display', 'none');
+                        $('#buscar').css('display', '');
+
+                        $('.imprimir').css('display', '');
+
+                        $.each(respond.data, function (index, llamada) {
+
+                            $('.table tbody').append(
+                                    `<tr class="">
+                                    <th>` + llamada.fecha + ` </td>
+                                    <th>` + llamada.telefono + `</th>                                   
+                                    <th>` + llamada.duracion + `</th>
+                                    <th>` + llamada.localidad + `</th>
+                                    <th>` + llamada.costo + `</th>
+                                </tr>`
+                                    );
+
+                        })
+                    });
+
+                } else {
+                    Swal.fire('Faltan campos para filtrar');
+                }
+
+
+
+
+
+
+
+            });
+
+
+
+        });
+
+    </script>
+
+{% endblock %}
+
+

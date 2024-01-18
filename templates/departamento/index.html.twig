@@ -1,0 +1,65 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+
+        {{ include("main/message.html.twig") }}
+
+            <div class="card mb-3 mb-md-4">
+
+                <div class="card-body">
+
+                    <div class="mb-3 mb-md-4 d-flex justify-content-between">
+                        <div class="h3 mb-0">Listado de Departamentos</div>
+                        <a type="button" class="btn btn-primary float-right" href="{{ path('departamento_new') }}">Insertar</a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Dependencia</th>
+                                    <th>Centro</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script>
+
+        $(document).ready(function() {
+
+            /* Generando el componente DataTable */
+            var Nosortcol = [3];
+            var route = Routing.generate('departamento_dataTable');
+            var dataTable = createDataTable(Nosortcol, route);
+
+            /* Funcionalidad para el comportamiento de la confirmación para eliminar elemento */
+            $('#dataTable tbody').on('click', '.eliminar', function () {
+                var id = $(this).attr("id");
+                var rutaEliminar = Routing.generate('departamento_delete', {'id': id});
+                createDelete(rutaEliminar)
+            });
+
+        });
+
+    </script>
+
+{% endblock %}
+

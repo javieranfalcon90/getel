@@ -1,0 +1,158 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+
+                <div class="row">
+
+                    <div class="col-md-6 col-xl-4 mb-3 mb-xl-4">
+                        <!-- Widget -->
+                        <a class="link-dark" href="{{ path('identificador_index') }}">
+                            <div class="card flex-row align-items-center p-3 p-md-4">
+                                <div class="icon icon-lg bg-soft-primary rounded-circle mr-3">
+                                    <i class="fas fa-code icon-text d-inline-block text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="lh-1 mb-1">Identificadores</h4>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- End Widget -->
+                    </div>
+
+                    <div class="col-md-6 col-xl-4 mb-3 mb-xl-4">
+                        <!-- Widget -->
+                        <a class="link-dark" href="{{ path('zona_index') }}">
+                            <div class="card flex-row align-items-center p-3 p-md-4">
+                                <div class="icon icon-lg bg-soft-primary rounded-circle mr-3">
+                                    <i class="fas fa-map-marker-alt icon-text d-inline-block text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="lh-1 mb-1">Zonas</h4>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- End Widget -->
+                    </div>
+
+                    <div class="col-md-6 col-xl-4 mb-3 mb-xl-4">
+                        <!-- Widget -->
+                        <a class="link-dark" href="{{ path('localidad_index') }}">
+                            <div class="card flex-row align-items-center p-3 p-md-4">
+                                <div class="icon icon-lg bg-soft-primary rounded-circle mr-3">
+                                    <i class="fas fa-location-arrow icon-text d-inline-block text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="lh-1 mb-1">Localidades</h4>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- End Widget -->
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-xl-4 mb-3 mb-xl-4">
+                        <!-- Widget -->
+                        <a class="link-dark" href="{{ path('centro_index') }}">
+                            <div class="card flex-row align-items-center p-3 p-md-4">
+                                <div class="icon icon-lg bg-soft-primary rounded-circle mr-3">
+                                    <i class="fas fa-building icon-text d-inline-block text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="lh-1 mb-1">Centros</h4>
+                                </div>
+                            </div>
+                        <!-- End Widget -->
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 col-xl-4 mb-3 mb-xl-4">
+                        <!-- Widget -->
+                        <a class="link-dark" href="{{ path('dependencia_index') }}">
+                            <div class="card flex-row align-items-center p-3 p-md-4">
+                                <div class="icon icon-lg bg-soft-primary rounded-circle mr-3">
+                                    <i class="fas fa-project-diagram icon-text d-inline-block text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="lh-1 mb-1">Dependencias</h4>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- End Widget -->
+                    </div>
+
+                    <div class="col-md-6 col-xl-4 mb-3 mb-xl-4">
+                        <!-- Widget -->
+                        <a class="link-dark" href="{{ path('departamento_index') }}">
+                            <div class="card flex-row align-items-center p-3 p-md-4">
+                                <div class="icon icon-lg bg-soft-primary rounded-circle mr-3">
+                                    <i class="fas fa-sitemap icon-text d-inline-block text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="lh-1 mb-1">Departamentos</h4>
+                                </div>
+                            </div>
+                            <!-- End Widget -->
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 col-xl-4 mb-3 mb-xl-4">
+                        <!-- Widget -->
+                        <a class="link-dark" href="{{ path('usuario_index') }}">
+                            <div class="card flex-row align-items-center p-3 p-md-4">
+                                <div class="icon icon-lg bg-soft-primary rounded-circle mr-3">
+                                    <i class="fas fa-user icon-text d-inline-block text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="lh-1 mb-1">Usuarios</h4>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- End Widget -->
+                    </div>
+
+
+                    <div class="col-md-6 col-xl-4 mb-3 mb-xl-4">
+                        <!-- Widget -->
+                        <a class="link-dark" href="{{ path('tarifa_index') }}">
+                            <div class="card flex-row align-items-center p-3 p-md-4">
+                                <div class="icon icon-lg bg-soft-primary rounded-circle mr-3">
+                                    <i class="fas fa-money-bill icon-text d-inline-block text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="lh-1 mb-1">Tarifas</h4>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- End Widget -->
+                    </div>
+
+                </div>
+
+        </div>
+    </div>
+   
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script>
+
+        $(document).ready(function() {
+
+            select_menu('menu-configuracion');
+
+        });
+
+    </script>
+
+{% endblock %}

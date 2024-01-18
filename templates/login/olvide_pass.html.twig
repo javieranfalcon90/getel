@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <title>GETEL</title>
+
+        <link href="{{ asset('librerias/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css"/>
+
+        <link href="{{ asset('librerias/grain/graindashboard.css') }}" rel="stylesheet" />
+
+    </head>
+    <body>
+        
+        <main class="main">
+            <div class="content">
+
+                <div class="container-fluid pb-5">
+
+                    <div class="row justify-content-md-center">
+                        <div class="card-wrapper col-12 col-md-4 mt-5">
+                            <div class="brand text-center mb-3">
+                                <a href="/"><img src="{{ asset('img/logo.png') }}"></a>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <form method="post" action="{{ path('enviar_email') }}" novalidate="novalidate">
+                                        {% if msg %}
+                                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        {% endif %}
+
+                                        <h1 class="h3 mb-3 font-weight-normal">Resetear contraseña.</h1>
+                                        
+                                        <div class="form-group">
+                                            <label>Dirección de Correo</label>
+                                            <input type="email" class="form-control" name="email" required autofocus autocomplete="false">
+                                            
+                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                        </div>
+
+                                        <button class="btn btn-block btn-primary" type="submit">
+                                            Solicitar reinicio
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <footer class="footer mt-3">
+                                <div class="container-fluid">
+                                    <div class="footer-content text-center small">
+                                        <span class="text-muted">© {{ 'now'|date('Y') }} GETEL v2.0. Dpto de Infocomunicaciones CECMED.
+                                        </span>
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </main>
+
+    </body>
+</html>
