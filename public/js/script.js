@@ -1,29 +1,3 @@
 
-$(document).ready(function () {
-
-    $('.content').css('visibility', 'visible');
-    $('.content').css('opacity', 1);
-    
-    $(".page-preloader").fadeOut("slow");
-  
-    select2 = $(".select2").select2({
-        language: "es",
-        theme: "bootstrap4",
-        placeholder: "",
-        width: '100%'
-    });
-
-
-});
-
-
-function select_menu(menu_id) {
-
-    var element = '#'+menu_id;
-
-    if (!$(element).hasClass('active')) {
-        $('.sidebar-menu li').removeClass('active');
-        $(element).addClass('active');
-    }
-}
+function createDataTable(e,a,t){return $("#dataTable").DataTable({autoWidth:!1,oSearch:{sSearch:t},order:[[0,"DESC"]],columnDefs:[{orderable:!1,targets:e},{searchable:!1,targets:0}],deferRender:!0,language:{paginate:{first:"<<",previous:"<",next:">",last:">>"},sLengthMenu:"Mostrar _MENU_ registros",sInfo:"Mostrando _START_ al _END_ de _TOTAL_ elementos",sInfoEmpty:"No hay datos para mostrar",sEmptyTable:"No hay datos para mostrar",sInfoFiltered:"(filtrado de _MAX_ elementos en total)",sLoadingRecords:"Cargando...",sProcessing:'<span class="spinner-border text-primary "></span>',sSearch:"Buscar:",sZeroRecords:"No se encontraron resultados"},processing:!0,serverSide:!0,ajax:a})}function filterColumn(e){e&&(value=$("#col"+e+"_filter").val(),$("#dataTable").DataTable().column(e).search(value))}function select_menu(e){var a="#"+e;$(a).hasClass("active")||($(".sidebar-menu li").removeClass("active"),$(a).addClass("active"))}function createDelete(e){Swal.fire({title:"CONFIRMACI\xd3N",text:"Esta acci\xf3n no se podr\xe1 deshacer. Seguro que desea eliminar este elemento?",type:"error",showCancelButton:!0,confirmButtonClass:"btn btn-danger",cancelButtonClass:"btn btn-light",cancelButtonText:"No, cancelar!",confirmButtonText:"Si, eliminar!",showLoaderOnConfirm:!0,preConfirm:function(){$.ajax({url:e,method:"POST"}).always(function(){swal.close(),location.reload(!0)})}})}$(document).ready(function(){$(".form").validate({errorPlacement:function(e,a){var t=$(a).parent().find("span.error");0==t.length&&(t=$(a).parent().parent().find("span.error")),e.insertAfter(t)},highlight:function(e){$(e).closest(".form-group").addClass("text-danger")},unhighlight:function(e){$(e).closest(".form-group").removeClass("text-danger")}}),$(".content").css("visibility","visible"),$(".content").css("opacity",1),$(".page-preloader").fadeOut("slow"),select2=$(".select2").select2({language:"es",theme:"bootstrap4",placeholder:"",width:"100%"})});
 
